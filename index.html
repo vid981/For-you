@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Madamji</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+      overflow-x: hidden;
+    }
+    .page {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .active {
+      display: flex;
+    }
+    .card {
+      width: 250px;
+      height: 150px;
+      background: yellow;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      transition: transform 0.6s;
+      perspective: 1000px;
+    }
+    .fade-message {
+      font-size: 1.5rem;
+      opacity: 0;
+      transition: opacity 1s;
+      margin-top: 20px;
+    }
+    .fade-message.show {
+      opacity: 1;
+    }
+    .next-btn {
+      background: yellow;
+      padding: 10px 20px;
+      border: none;
+      font-size: 1rem;
+      margin-top: 30px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .glow-heart {
+      width: 100px;
+      height: 90px;
+      background: red;
+      position: relative;
+      transform: rotate(-45deg);
+      animation: glow 2s infinite alternate;
+    }
+    .glow-heart:before,
+    .glow-heart:after {
+      content: '';
+      width: 100px;
+      height: 90px;
+      background: red;
+      border-radius: 50%;
+      position: absolute;
+    }
+    .glow-heart:before {
+      top: -50px;
+      left: 0;
+    }
+    .glow-heart:after {
+      left: 50px;
+      top: 0;
+    }
+    @keyframes glow {
+      from {
+        box-shadow: 0 0 10px red;
+      }
+      to {
+        box-shadow: 0 0 30px red, 0 0 60px red;
+      }
+    }
+    .flip-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .flip-card {
+      background-color: transparent;
+      width: 200px;
+      height: 150px;
+      perspective: 1000px;
+    }
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      color: white;
+      padding: 10px;
+    }
+    .flip-card-front {
+      background: #f1c40f;
+    }
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }
+    .green { background: #2ecc71; }
+    .purple { background: #9b59b6; }
+    .blue { background: #3498db; }
+    .yellow { background: #f1c40f; }
+  </style>
+</head>
+<body>
+  <!-- Page 1 -->
+  <div id="page1" class="page active">
+    <div class="card" onclick="startMessages()">Tap Here</div>
+    <div id="messages" class="fade-message"></div>
+  </div>
+
+  <!-- Page 2 -->
+  <div id="page2" class="page">
+    <div class="glow-heart"></div>
+    <p style="font-size: 1.2rem; margin-top: 20px;">Here is a voice note for you</p>
+    <audio id="audio" controls style="margin-top: 15px;">
+      <source src="voice.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+    <button class="next-btn" onclick="goToPage(3)">Let's gooooo →</button>
+  </div>
+
+  <!-- Page 3 -->
+  <div id="page3" class="page">
+    <div class="flip-grid">
+      <div class="flip-card yellow" onclick="flipCard(this)">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">Click Me</div>
+          <div class="flip-card-back">Another year of your love is the greatest gift to me</div>
+        </div>
+      </div>
+      <div class="flip-card purple" onclick="flipCard(this)">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">Click Me</div>
+          <div class="flip-card-back">To the queen of my heart—your smile is my favorite reason to wake up.</div>
+        </div>
+      </div>
+      <div class="flip-card blue" onclick="flipCard(this)">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">Click Me</div>
+          <div class="flip-card-back">You're not older, just more stunning every year.</div>
+        </div>
+      </div>
+      <div class="flip-card green" onclick="flipCard(this)">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">Click Me</div>
+          <div class="flip-card-back">You’re my favorite notification, even on silent mode.</div>
+        </div>
+      </div>
+    </div>
+    <button class="next-btn" onclick="goToPage(4)">Will, I have written something for you Madam ji →</button>
+  </div>
+
+  <!-- Page 4 -->
+  <div id="page4" class="page">
+    <h2 style="font-size: 1.5rem; max-width: 600px;">
+      Happy Birthday, my love! Today is the day the world was blessed with someone so amazing, and I feel incredibly lucky to call you mine. You are my greatest joy, my strength, and my reason to smile every day.<br><br>
+      On your special day, I just want you to know how deeply loved you are. You’ve touched my heart in ways no one else ever could. Every laugh we’ve shared, every moment we’ve spent together, and every dream we’ve built brings me closer to you.<br><br>
+      My wish for you today is simple—may this year bring you endless happiness, success, and the fulfillment of all your dreams. I promise to be here, loving you through it all, celebrating every victory and standing strong in every challenge.<br><br>
+      Thank you for being the wonderful person you are and for filling my life with so much love. Happy Birthday to my heart, my happiness, and my forever. I love you more than words could ever say.
+    </h2>
+  </div>
+
+  <script>
+    const messages = [
+      "Happy birthday Madamji !!!",
+      "It’s your special day",
+      "So..........!!",
+      "I want to make something special for you"
+    ];
+    let currentMessage = 0;
+
+    function startMessages() {
+      const card = document.querySelector(".card");
+      card.style.display = "none";
+      showMessage();
+    }
+
+    function showMessage() {
+      if (currentMessage >= messages.length) {
+        setTimeout(() => goToPage(2), 1000);
+        return;
+      }
+      const messageBox = document.getElementById("messages");
+      messageBox.textContent = messages[currentMessage];
+      messageBox.classList.add("show");
+      setTimeout(() => {
+        messageBox.classList.remove("show");
+        currentMessage++;
+        setTimeout(showMessage, 1000);
+      }, 2000);
+    }
+
+    function goToPage(n) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(`page${n}`).classList.add('active');
+    }
+
+    function flipCard(el) {
+      el.classList.toggle('flipped');
+    }
+  </script>
+</body>
+</html>
